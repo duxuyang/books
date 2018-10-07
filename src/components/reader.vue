@@ -35,34 +35,34 @@
 			<div class="setbg1" value="rdefault"></div>
 			<div class="setbg1" value="rblue"></div>
 			<div class="setbg1" value="rgreen"></div>
-			<div class="setbg1" value="rlight"></div>			
+			<div class="setbg1" value="rlight"></div>
 		</div>
 
 	</div>
 </div>
 <div :class="{ashow:apanel,asside}">
-	<div class="asside-over" @click="assidePanel"></div>
+	<div class="asside-over" @click="showis"></div>
 	<div class="list">
 		<div class="list-top" >
 			目录
 		</div>
 		<div class="listmain">
-			<ul v-for="item in title">
-				<li>{{item.title}}</li>
+			<ul v-for="(val,index) in titlelist">
+				<li @click="clicktitle(index)">{{val.title}}</li>
 			</ul>
 		</div>
 	</div>
 </div>
 
 <div class="content">
-	<div class="title">山东电视大厦</div>
+	<div class="title">{{title}}</div>
 	<div class="con">
- 		<p v-for=""></p>
+ 		<p v-for="item in content">{{item}}</p>
 	</div>
  	<div class="foot">
 	<ul>
-		<li>上一章</li>
-		<li>下一章</li>
+		<li >上一章</li>
+		<li >下一章</li>
 	</ul>
 </div> 
 </div>	
@@ -77,27 +77,57 @@ export default{
 			panel:false,
 			apanel:false,
 			asside:'asside',
-			title:[]
+			titlelist:[],//章节列表
+			content:[],//内容
+			title:''
 		}
 	},
 	created(){
+		if(localStorage.getItem("readinfo")){//有
+			let info=JSON.parse(localStorage.getItem("readinfo"));
+			let man=false;
+			for(let p in info){
+					if(info[p].id==this.$route.params.id){
+						 man=true;
+							this.pcon(info[p].id,info[p].num)
+					}
+			}
+			if(man==false){
+				info.push({id:this.$route.params.id,num:1});
+				this.pcon(this.$route.params.id,1);
+				localStorage.setItem("readinfo",JSON.stringify(info));
+			}
+		}else{//没有
+				var arr=JSON.stringify([{id:this.$route.params.id,num:1}])
+			 localStorage.setItem("readinfo",arr);
+			 this.pcon(this.$route.params.id,1);
+		}
 		this.tlist(this.$route.params.id);
 	},
 	methods:{
-		showBar(){
+		showBar(){//头部和尾部
 			this.panel=!this.panel;
 		},
-		assidePanel(){
-			this.apanel=!this.apanel;
-		},
-		showis(){
+		showis(){//目录
 			this.apanel=!this.apanel;
 		},
 		tlist(id){
 			var that=this;
 			axios.post(process.env.API_HOST+'/title',querystring.stringify({id:id})).then((res) => {
-			that.title=res.data;
-		})		
+			that.titlelist=res.data;
+		})
+		},
+		pcon(id,num){
+			var that=this;
+			axios.post(process.env.API_HOST+'/reader',querystring.stringify({id:id,number:num})).then((res) => {
+			  that.title=res.data[0].title;
+			  that.content=res.data[0].content.split("-");
+			  //console.log(res.data[0].title)
+		})
+		},
+		clicktitle(index){//点击章列表
+			this.showis();
+			this.pcon(index+1);
 		}
 	}
 }

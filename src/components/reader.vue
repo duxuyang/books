@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class="header" v-show="panel">
-	<div class="back">
+	<div class="back" @click="back">
 		<div class="back-icon"></div>
 	</div>
 </div>
@@ -11,31 +11,31 @@
 		<div class="ficon"></div>
 		<div class="fnav">目录</div>
 	</div>
-	<div>
+	<div @click="fsize">
 		<div class="ficon"></div>
 		<div class="fnav">字体</div>		
 	</div>
-	<div>
+	<div @click="night">
 		<div class="ficon"></div>
 		<div class="fnav">夜间</div>		
 	</div>
 </div>
-<div class="set" style="display: none">
+<div class="set" v-show="setpan">
 	<div class="setfont">
 		<div class="setf">字号</div>
 		<div class="setr">
 			<div class="setcon">小</div>
 			<div class="setcon">中</div>
-			<div class="setcon">大</div>			
+			<div class="setcon">大</div>	
 		</div>
 	</div>
 	<div class="setbg">
 		<div class="setf">背景</div>
 		<div class="setr">
-			<div class="setbg1" value="rdefault"></div>
-			<div class="setbg1" value="rblue"></div>
-			<div class="setbg1" value="rgreen"></div>
-			<div class="setbg1" value="rlight"></div>
+			<div class="setbg1" @click="setbg(1)"></div>
+			<div class="setbg1" @click="setbg(2)"></div>
+			<div class="setbg1" @click="setbg(3)"></div>
+			<div class="setbg1" @click="setbg(4)"></div>
 		</div>
 
 	</div>
@@ -54,15 +54,15 @@
 	</div>
 </div>
 
-<div class="content">
+<div class="content" :bg="bgcolor" :night="bg_night">
 	<div class="title">{{title}}</div>
 	<div class="con">
  		<p v-for="item in content">{{item}}</p>
 	</div>
  	<div class="foot">
 	<ul>
-		<li >上一章</li>
-		<li >下一章</li>
+		<li @click="prev">上一章</li>
+		<li @click="next">下一章</li>
 	</ul>
 </div> 
 </div>	
@@ -74,60 +74,102 @@
 export default{
 	data(){
 		return{
+			bgcolor:'1',
+			bg_night:false,
 			panel:false,
 			apanel:false,
+			setpan:false,//设置字体框弹出
 			asside:'asside',
 			titlelist:[],//章节列表
 			content:[],//内容
-			title:''
+			title:'',   //标题
+			pid:'',  //id
+			curChapter:'', //当前章节
+			maxChapter:'',//总章数
+			info:{}
 		}
 	},
 	created(){
+		this.pid=this.$route.params.id;
 		if(localStorage.getItem("readinfo")){//有
-			let info=JSON.parse(localStorage.getItem("readinfo"));
+			 this.info=JSON.parse(localStorage.getItem("readinfo"));
 			let man=false;
-			for(let p in info){
-					if(info[p].id==this.$route.params.id){
-						 man=true;
-							this.pcon(info[p].id,info[p].num)
+			for(let p in this.info){
+					if(this.info[p].id==this.pid){
+						man=true;
+						this.curChapter=this.info[p].num;
+						this.pcon(this.info[p].id,this.info[p].num)
 					}
 			}
 			if(man==false){
-				info.push({id:this.$route.params.id,num:1});
-				this.pcon(this.$route.params.id,1);
-				localStorage.setItem("readinfo",JSON.stringify(info));
+				this.curChapter=1;
+				this.pcon(this.pid,1);
+				this.saveinfo(1);
 			}
 		}else{//没有
-				var arr=JSON.stringify([{id:this.$route.params.id,num:1}])
-			 localStorage.setItem("readinfo",arr);
-			 this.pcon(this.$route.params.id,1);
+			this.curChapter=1;
+			this.pcon(this.pid,1);
+			this.saveinfo(1);
 		}
-		this.tlist(this.$route.params.id);
+		this.tlist(this.pid);
 	},
 	methods:{
+		saveinfo(num){//本地存储章节
+			this.info[this.pid]={id:this.pid,num:num};
+     localStorage.setItem("readinfo",JSON.stringify(this.info));
+		},
 		showBar(){//头部和尾部
+			this.setpan=false;
 			this.panel=!this.panel;
 		},
 		showis(){//目录
 			this.apanel=!this.apanel;
 		},
-		tlist(id){
+		tlist(id){//目录列表
 			var that=this;
 			axios.post(process.env.API_HOST+'/title',querystring.stringify({id:id})).then((res) => {
 			that.titlelist=res.data;
+			that.maxChapter=res.data.length;
 		})
 		},
-		pcon(id,num){
+		pcon(id,num){//内容
 			var that=this;
 			axios.post(process.env.API_HOST+'/reader',querystring.stringify({id:id,number:num})).then((res) => {
 			  that.title=res.data[0].title;
 			  that.content=res.data[0].content.split("-");
-			  //console.log(res.data[0].title)
 		})
 		},
 		clicktitle(index){//点击章列表
 			this.showis();
-			this.pcon(index+1);
+			this.pcon(this.pid,index+1);
+			this.curChapter=index+1;
+			this.saveinfo(index+1);//保存章节
+		},
+		night(){//夜间切换
+			this.bg_night=!this.bg_night;
+		},
+		fsize(){//字体框
+			this.setpan=!this.setpan;
+		},
+		setbg(i){//设置阅读背景
+			this.bgcolor=i;
+		},
+		next(){//下一章
+			if(this.curChapter<this.maxChapter){
+				this.curChapter++;
+				this.pcon(this.pid,this.curChapter);
+				this.saveinfo(this.curChapter);
+			}
+		},
+		prev(){//上一章
+			if(this.curChapter>1){
+				this.curChapter--;
+				this.pcon(this.pid,this.curChapter);
+				this.saveinfo(this.curChapter);		
+			}
+		},
+		back(){//返回
+			this.$router.go(-1);
 		}
 	}
 }
@@ -307,28 +349,56 @@ z-index: 10;
 	background: #cad9e8;
 }
 .setbg .setr>div:nth-child(3){
-	    background: #d1edd1;
+ background: #d1edd1;
 }
 .setbg .setr>div:nth-child(4){
 	background: #e6e6e6;
 }
 .content{
 	width: 100%;
-	background-color: #e9dfc7;
 	min-height: 600px;
 	padding:40px 15px 15px;
 }
+.content[bg='1']{
+background-color: #e9dfc7;
+}
+.content[bg='2']{
+background-color:#cad9e8;
+}
+.content[bg='3']{
+background-color:#d1edd1;
+}
+.content[bg='4']{
+background-color:#e6e6e6;
+}
+.content[night=true]{
+	background-color: #0f1410;
+}
 .content .title{
-	  position: fixed;
-    top: 0;
-    left: 15px;
-    right: 15px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-    color: #736357;
-    font-weight: bold;
-    background-color: #e9dfc7;
+  position: fixed;
+  top: 0;
+  left: 15px;
+  right: 15px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: #736357;
+  font-weight: bold;
+}
+.content[bg='1'] .title{
+background-color: #e9dfc7;
+}
+.content[bg='2'] .title{
+background-color: #cad9e8;
+}
+.content[bg='3'] .title{
+background-color: #d1edd1;
+}
+.content[bg='4'] .title{
+background-color: #e6e6e6;
+}
+.content[night=true] .title{
+	background-color: #0f1410;
 }
 .content .con p{
 	  text-indent:34px;

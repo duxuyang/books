@@ -1,7 +1,12 @@
 <template>
 	<div>
 <div class="wiper">
-	
+	<mt-swipe :auto="4000">
+	  <mt-swipe-item><img src="../assets/images/l1.jpg" alt=""></mt-swipe-item>
+	  <mt-swipe-item><img src="../assets/images/l2.jpg" alt=""></mt-swipe-item>
+	  <mt-swipe-item><img src="../assets/images/l3.jpg" alt=""></mt-swipe-item>
+	  <mt-swipe-item><img src="../assets/images/l4.jpg" alt=""></mt-swipe-item>
+	</mt-swipe>	
 </div>
 <div class="nav">
 	<div class="nav-1">
@@ -37,7 +42,6 @@
 			<div class="icon"></div>
 			<h4 class="guid">其他</h4>
 		</div>
-
 	</div>
 	
 </div>
@@ -141,19 +145,19 @@
 		this.free();
   },
   methods:{
-			hotred:function(){
-				axios.post(process.env.API_HOST+'/hotbook').then((res) => {
-					this.hotlist=res.data;
-				})
-			},
-			free(){
-				axios.post(process.env.API_HOST+'/freeread').then((res) => {
-					this.freelist=res.data;
-				})
-			},
-			type(msg){
-				this.$router.push('/list/'+msg)
-			}
+		hotred:function(){
+			axios.post(process.env.API_HOST+'/hotbook').then((res) => {
+				this.hotlist=res.data;
+			})
+		},
+		free(){
+			axios.post(process.env.API_HOST+'/freeread').then((res) => {
+				this.freelist=res.data;
+			})
+		},
+		type(msg){
+			this.$router.push('/list/'+msg)
+		}
   }
 }
 
@@ -166,6 +170,11 @@ body{
 .wiper{
 	width: 100%;
 	height: 170px;
+	overflow: hidden;
+}
+.mint-swipe-items-wrap>div>img{
+	width: 100%;
+	height: 100%;
 }
 .nav{
 	background: #fff;
@@ -288,11 +297,10 @@ body{
 	width:100%;
 }
 .booklist .list ul li a>div{
-width:100%;
-line-height: 20px;
+	width:100%;
+	line-height: 20px;
 	overflow: hidden;
-    text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }
 
-	
 </style>

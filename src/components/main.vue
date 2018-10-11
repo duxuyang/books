@@ -1,5 +1,15 @@
 <template>
 	<div>
+<div class="header">
+	<ul>
+		<li @click="user">
+			<img src="../assets/images/user.png" alt="">
+		</li>
+		<li @click="booklist">
+			<img src="../assets/images/bookslist.png" alt="">
+		</li>
+	</ul>
+</div>
 <div class="wiper">
 	<mt-swipe :auto="4000">
 	  <mt-swipe-item><img src="../assets/images/l1.jpg" alt=""></mt-swipe-item>
@@ -157,6 +167,17 @@
 		},
 		type(msg){
 			this.$router.push('/list/'+msg)
+		},
+		user(){
+			if(!this.$store.state.isLogin){
+				this.$router.push('/login')
+			}else{
+				this.$router.push('/list')
+			}
+			
+		},
+		booklist(){
+
 		}
   }
 }
@@ -166,6 +187,27 @@
 	
 body{
 	background: #f8f8f8;
+}
+.header{
+	width: 100%;
+	height: 44px;
+	border-bottom: 1px solid #f3f3f3;
+}
+.header ul{
+	height: 100%;
+	float: right;
+	display: flex;
+	align-items:center;
+	margin-right: 15px;
+}
+.header ul li{
+	width:24px;
+	height: 24px;
+	margin-right: 15px;
+}
+.header ul li img{
+	width: 100%;
+	height: 100%;
 }
 .wiper{
 	width: 100%;

@@ -4,6 +4,8 @@ import main from '@/components/main'
 import detail from '@/components/detail'
 import list from '@/components/list'
 import reader from '@/components/reader'
+import login from '@/components/login'
+import bookcase from '@/components/bookcase'
 Vue.use(Router)
 
 export default new Router({
@@ -15,15 +17,29 @@ export default new Router({
     },
     {
       path: '/detail/:id',
+      name:'detail',
       component: detail
     },
     {
       path: '/list/:type',
+      name:'list',
       component:list
     },
      {
       path: '/reader/:id',
+      name:'reader',
       component:reader
-    }   
+    },
+     {
+      path: '/login',
+      name:'login',
+      component:login
+    },
+     {
+      path: '/bookcase',
+      name:'bookcase',
+      component:bookcase
+    }
+
   ]
 })

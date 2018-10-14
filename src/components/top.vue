@@ -21,14 +21,10 @@
 			tback(){
 				this.$emit('sendback',1);
 			}
-
 		}
 	}
-
-	
 </script>
 <style scoped>
-	
 	.header{
 	width: 100%;
 	height: 44px;

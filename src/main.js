@@ -13,13 +13,12 @@ import './assets/css/reset.css'
 
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
-	console.log(to)
     if (to.fullPath=="/userinfo" || to.fullPath=="/bookcase") {
-				if(!store.state.isLogin){
-					router.push('/login')
-				}
+			if(!store.state.isLogin){
+				router.push('/login')
+			}
     } else {
-       next()
+      next()
     }
 });
 

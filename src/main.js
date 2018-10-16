@@ -1,4 +1,4 @@
-
+import './assets/css/reset.css'
 import Vue from 'vue'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
@@ -9,7 +9,7 @@ import store from './vuex/store';
 
 Vue.use(MintUI)
 Vue.config.productionTip = false
-import './assets/css/reset.css'
+
 
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {

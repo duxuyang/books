@@ -3,7 +3,8 @@
 <div class="header">
 	<ul>
 		<li @click="user">
-			<img src="../assets/images/user.png" alt="">
+			<img src="../assets/images/user.png" alt="" v-if="userimg">
+			<img src="../assets/images/userhead.jpg" alt="" v-else>
 		</li>
 		<li @click="booklist">
 			<img src="../assets/images/bookslist.png" alt="">
@@ -24,38 +25,59 @@
 			<div class="icon"></div>
 			<h4 class="guid">玄幻</h4>
 		</div>
-		<div>
+		<div @click="type('修真')">
 			<div class="icon"></div>
 			<h4 class="guid">修真</h4>
 		</div>
-		<div>
+		<div @click="type('都市')">
 			<div class="icon"></div>
 			<h4 class="guid">都市</h4>
 		</div>
-		<div>
+		<div @click="type('历史')">
 			<div class="icon"></div>
 			<h4 class="guid">历史</h4>
 		</div>
-		<div>
+		<div @click="type('网游')">
 			<div class="icon"></div>
 			<h4 class="guid">网游</h4>
 		</div>
-		<div>
+		<div @click="type('科幻')">
 			<div class="icon"></div>
 			<h4 class="guid">科幻</h4>
 		</div>
-		<div>
+		<div @click="type('言情')">
 			<div class="icon"></div>
 			<h4 class="guid">言情</h4>
 		</div>
-		<div>
+		<div @click="type('其他')">
 			<div class="icon"></div>
 			<h4 class="guid">其他</h4>
 		</div>
 	</div>
 	
 </div>
-
+<div class="booklist">
+	<div class="top">
+		<h2 class="title">免费读书</h2>
+		<div class="more">
+			<span>更多</span>
+			<span></span>
+		</div>
+	</div>
+	<div class="list">
+			<ul>
+				<li v-for="item in freelist">
+					<router-link :to="'/detail/'+item.id">
+					<a href="javascript:void(0)">
+						<img :src="item.images" alt="">
+						<div class="tname">{{item.name}}</div>
+						<div class="tauthor">{{item.author}}</div>						
+					</a>
+				 </router-link>
+				</li>				
+			</ul>
+	</div>
+</div>	
 <div class="booklist">
 	<h2 class="title">热门小说</h2>
 	<div class="list">
@@ -115,28 +137,7 @@
 			</ul>
 	</div>
 </div>
-<div class="booklist">
-	<div class="top">
-		<h2 class="title">免费读书</h2>
-		<div class="more">
-			<span>更多</span>
-			<span></span>
-		</div>
-	</div>
-	<div class="list">
-			<ul>
-				<li v-for="item in freelist">
-					<router-link :to="'/detail/'+item.id">
-					<a href="javascript:void(0)">
-						<img :src="item.images" alt="">
-						<div class="tname">{{item.name}}</div>
-						<div class="tauthor">{{item.author}}</div>						
-					</a>
-				 </router-link>
-				</li>				
-			</ul>
-	</div>
-</div>		
+	
 
 	</div>
 </template>
@@ -147,10 +148,16 @@
   data () {
     return {
 			hotlist:[],
-			freelist:[]
+			freelist:[],
+			userimg:true
     }
   },
   created(){
+  	  if(!this.$store.state.isLogin){
+					this.userimg=true;
+			}else{
+				this.userimg=false;
+			}
 		this.hotred();
 		this.free();
   },

@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<div class="header">
+			<div class="back" @click="back"></div>
+		</div>
 		<div class="header-center">
 			<img src="../assets/images/userhead.jpg" alt="">
 			<div class="header-p"><span>{{uname}}</span></div>
@@ -70,12 +73,31 @@
 					axios.post(process.env.API_HOST+'/users/myinfo',querystring.stringify({id:this.$store.state.userid})).then((res) =>{
 						that.uname=res.data[0].uname;
 					})				
+			},
+			back(){
+				this.$router.push('/main');
 			}
 		}
 	}
 
 </script>
 <style scoped>
+.header{
+	position: fixed;
+	top:0;
+	left: 0;
+	right: 0;
+	height: 44px;
+	display: flex;
+	align-items:center;
+}
+.header .back{
+		width:20px;
+	height: 20px;
+	background:url(../assets/images/back.png) no-repeat;
+	background-size: 100% 100%;	
+	margin-left:10px;
+}
 .header-center{
 	width:100%;
 	height: 150px;

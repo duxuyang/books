@@ -10,13 +10,17 @@ import myinfo from '@/components/myinfo'
 Vue.use(Router)
 
 export default new Router({
-   mode: 'history',
   routes: [
     {
       path: '/',
       name: 'main',
       component: main
     },
+    {
+      path: '/main',
+      name: 'main',
+      component: main
+    },    
     {
       path: '/detail/:id',
       name:'detail',

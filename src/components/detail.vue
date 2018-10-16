@@ -154,7 +154,9 @@ justify-content: center;
 	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	-webkit-box-orient: vertical;
+	/*! autoprefixer: off */
+  -webkit-box-orient:vertical;
+  /* autoprefixer: on */
 	-webkit-line-clamp: 2;
 }
 .con .coninfo .author{
@@ -194,7 +196,9 @@ justify-content: center;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
+	/*! autoprefixer: off */
+  -webkit-box-orient:vertical;
+  /* autoprefixer: on */
     -webkit-line-clamp:5;
 		margin-top:14px;
 }
@@ -267,7 +271,9 @@ justify-content: center;
 	 display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	-webkit-box-orient: vertical;
+	/*! autoprefixer: off */
+  -webkit-box-orient:vertical;
+  /* autoprefixer: on */
 	-webkit-line-clamp: 1;
 	line-height: 16px;
 	height: 16px;
@@ -280,7 +286,9 @@ justify-content: center;
 		 display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	-webkit-box-orient: vertical;
+	/*! autoprefixer: off */
+  -webkit-box-orient:vertical;
+  /* autoprefixer: on */
 	-webkit-line-clamp: 1;
 	font-size:12px;
 }

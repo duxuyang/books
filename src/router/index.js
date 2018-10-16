@@ -6,9 +6,11 @@ import list from '@/components/list'
 import reader from '@/components/reader'
 import login from '@/components/login'
 import bookcase from '@/components/bookcase'
+import myinfo from '@/components/myinfo'
 Vue.use(Router)
 
 export default new Router({
+   mode: 'history',
   routes: [
     {
       path: '/',
@@ -39,7 +41,11 @@ export default new Router({
       path: '/bookcase',
       name:'bookcase',
       component:bookcase
+    },
+     {
+      path: '/myinfo',
+      name:'myinfo',
+      component:myinfo
     }
-
   ]
 })

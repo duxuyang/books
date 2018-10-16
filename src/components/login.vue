@@ -9,14 +9,14 @@
 		  	<div class="login1" v-show="biao==0">
 		  		<div class="username">
 		  			<label></label>
-		  			<input type="" name="" placeholder="用户名/手机号/邮箱">
+		  			<input placeholder="用户名/手机号/邮箱" v-model="name">
 		  		</div>
 		  		<div class="pass">
 		  			<label></label>
-		  			<input type="password" name="" placeholder="请输入密码">
+		  			<input type="password"  placeholder="请输入密码" v-model="pass">
 		  			<div>忘记密码?</div>
 		  		</div>
-		  		<div class="btnlogin">登录</div>
+		  		<div class="btnlogin" @click="login1">登录</div>
 		  		<div class="btnregist">注册</div>
 		  	</div>
 		  	<div class="login2" v-show="biao==1">
@@ -37,11 +37,15 @@
 </template>
 <script>
 	import top from '@/components/top'
+	import axios from 'axios'
+	var querystring = require('querystring');
 	export default {
   data () {
     return {
       tablist:["密码登录","快捷登录"],
-      biao:'0'
+      biao:'0',
+      name:'',
+      pass:''
     }
   },
   methods:{
@@ -50,6 +54,18 @@
   	},
   	back(msg){
 			this.$router.go(-1);
+		},
+		login1(){
+			var that=this;
+			axios.post(process.env.API_HOST+'/users/login',querystring.stringify({uname:that.name,upass:that.pass})).then((res) =>{
+					if(res.data.code==1){//登录成功
+					  this.$store.state.userid=res.data.id;
+						this.$store.state.isLogin=true;
+						this.$router.push('/myinfo');
+					}else{//登录失败
+
+					}
+			})		
 		}
   },
   components:{

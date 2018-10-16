@@ -96,11 +96,13 @@ export default {
 }
 .list ul li .book-desc{
 	display: -webkit-box;
-	overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    font-size: 14px;
-    margin-top:5px;
+	/*! autoprefixer: off */
+  -webkit-box-orient:vertical;
+  /* autoprefixer: on */
+  -webkit-line-clamp:2;
+  overflow: hidden;
+  font-size: 14px;
+  margin-top:5px;
 }
 .list ul li .book-meta{
 	position: absolute;
@@ -108,7 +110,7 @@ export default {
 	left: 0;
 	right: 0;
 	font-size: 0;
-     line-height: 20px;
+	line-height: 20px;
 }
 .list ul li .book-meta>span{
 	display: inline-block;

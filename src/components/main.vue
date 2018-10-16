@@ -172,12 +172,17 @@
 			if(!this.$store.state.isLogin){
 				this.$router.push('/login')
 			}else{
-				this.$router.push('/list')
+				this.$router.push('/myinfo')
 			}
 			
 		},
 		booklist(){
 
+		},
+		islogin(){
+			axios.post(process.env.API_HOST+'/users/login').then((res) =>{
+				
+			})
 		}
   }
 }

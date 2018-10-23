@@ -53,8 +53,7 @@
 	</div>
 </template>
 <script>
-		import axios from 'axios'
-	var querystring = require('querystring');
+
 	export default {
 		data(){
 			return {
@@ -70,7 +69,7 @@
 			},
 			info(){
 				var that=this;
-					axios.post(process.env.API_HOST+'/users/myinfo',querystring.stringify({id:this.$store.state.userid})).then((res) =>{
+					this.axios.post(process.env.API_HOST+'/users/myinfo',this.qs.stringify({id:this.$store.state.userid})).then((res) =>{
 						that.uname=res.data[0].uname;
 					})				
 			},

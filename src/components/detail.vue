@@ -15,8 +15,9 @@
   </div>
   <div class="reader">
   	<router-link :to="'/reader/'+detail.id">
-  		<a href="javascript:void(0)" >开始阅读</a>
+  		<span>开始阅读</span>
   	</router-link>
+  	<span class="addcase" @click="addcase">加入书架</span>
   </div>
   <p>{{detail.info}}
   </p>
@@ -97,8 +98,6 @@
 </template>
 <script>
 	import top from '@/components/top'
-	import axios from 'axios'
-	var querystring = require('querystring');
 	export default {
 		data(){
 			return {
@@ -113,19 +112,22 @@
 				this.$router.go(-1);
 			},
 			list(id){
-				axios.post(process.env.API_HOST+'/bookdetail',querystring.stringify({ id:id})).then((res) => {
+				this.axios.post(process.env.API_HOST+'/bookdetail',this.qs.stringify({id:id})).then((res) => {
 					this.detail=res.data[0];
-				})			
+				})
+
+			},
+			addcase(){
+
 			}
 		},
 	  components:{
 	  	'top':top
 	  }
-	}	
+	}
 
 </script>
 <style scoped>
-
 .main{
 	width: 100%;
 	padding: 0 15px;
@@ -166,41 +168,47 @@ justify-content: center;
 }
 .con .coninfo .bookt{
 	font-size:14px;
-    color: #999;
-    line-height:20px;
+	color: #999;
+	line-height:20px;
 }
 .con .coninfo .price{
 	font-size:14px;
-   color: #999;
-   line-height:20px;
-   margin-top:5px;
+	color: #999;
+	line-height:20px;
+	margin-top:5px;
 }
 .reader {
 	display: flex;
 }
-.reader a{
+.reader span{
+	display: inline-block;
   background: #00c98d;
   color: #fff;
-  height: 39px;
-  line-height: 39px;
+  height: 35px;
+  line-height: 35px;
   border: 1px solid #00c98d;
   border-radius:8px;
   font-size: 14px;
   padding: 0 10px;
   text-align: center;
 }
+.reader .addcase{
+	background: #fff;
+	color: #1a1a1a;
+	margin-left:10px;
+}
 .main p{
-	 line-height:22px;
-    font-size: 14px;
-    color: #999;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	line-height:22px;
+	font-size: 14px;
+	color: #999;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	/*! autoprefixer: off */
-  -webkit-box-orient:vertical;
-  /* autoprefixer: on */
-    -webkit-line-clamp:5;
-		margin-top:14px;
+	-webkit-box-orient:vertical;
+	/* autoprefixer: on */
+	-webkit-line-clamp:5;
+	margin-top:14px;
 }
 .main .menu{
 	display: flex;
@@ -237,7 +245,6 @@ justify-content: center;
 	background-position: center;;
 	margin-left:5px;
 }
-
 .comment{
 	border-top:10px solid #f8f8f8;;
 }
@@ -268,12 +275,12 @@ justify-content: center;
 .comment ul li .title{
 	color: #333;
 	width: 100%;
-	 display: -webkit-box;
+	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	/*! autoprefixer: off */
-  -webkit-box-orient:vertical;
-  /* autoprefixer: on */
+	-webkit-box-orient:vertical;
+	/* autoprefixer: on */
 	-webkit-line-clamp: 1;
 	line-height: 16px;
 	height: 16px;
@@ -283,12 +290,12 @@ justify-content: center;
 	color: #999;
 	line-height: 16px;
 	height: 16px;
-		 display: -webkit-box;
+	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	/*! autoprefixer: off */
-  -webkit-box-orient:vertical;
-  /* autoprefixer: on */
+	-webkit-box-orient:vertical;
+	/* autoprefixer: on */
 	-webkit-line-clamp: 1;
 	font-size:12px;
 }
@@ -303,18 +310,16 @@ justify-content: center;
 	align-items:center;
 }
 .comment .link span:nth-child(1){
-color: #333;
-    font-size: 14px;
+	color: #333;
+	font-size: 14px;
 }
 .comment .link span:nth-child(2){
 	display: inline-block;
-    width:12px;
-    height: 12px;
-    background: url(../assets/images/xun.png) no-repeat;
-    background-size: 12px;
-    margin-left: 4px;
-    vertical-align: middle;
+	width:12px;
+	height: 12px;
+	background: url(../assets/images/xun.png) no-repeat;
+	background-size: 12px;
+	margin-left: 4px;
+	vertical-align: middle;
 }
-
-
 </style>

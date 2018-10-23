@@ -4,7 +4,6 @@
 		<div class="list">
 			<ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="false">
 				<li v-for="item in list" @click="toclick(item.id)">
-					<!-- <router-link :to="'/list/'+item.id"> -->
 					<img :src="item.images" alt="">
 					<div class="book-detail">
 						<h3>{{item.name}}</h3>
@@ -17,7 +16,6 @@
 							<span class="ser">{{item.serialize}}</span>
 						</div>
 					</div>
-				<!-- </router-link> -->
 				</li>
 			</ul>
 		</div>
@@ -25,8 +23,6 @@
 </template>
 <script>
 	import top from '@/components/top'
-	import axios from 'axios'
-	var querystring = require('querystring');
 export default {
 	data(){
 		return {
@@ -47,19 +43,18 @@ export default {
 			this.pi++;
 		  this.loading = true;
 		  var that=this;
-			axios.post(process.env.API_HOST+'/type',querystring.stringify({pno:that.pi,pageSize:8,type:that.type})).then((res) => {
+			this.axios.post(process.env.API_HOST+'/type',this.qs.stringify({pno:that.pi,pageSize:8,type:that.type})).then((res) => {
 				 this.loading = false;
 				if(res.data.length){
 					 for(let i of res.data){
 							that.list.push(i);
 					 }
 				}
-
-			})				
+			})	
 		},
 		listdatas(pno){
 			var that=this;
-			axios.post(process.env.API_HOST+'/type',querystring.stringify({pno:pno,pageSize:8,type:that.type})).then((res) => {
+			this.axios.post(process.env.API_HOST+'/type',this.qs.stringify({pno:pno,pageSize:8,type:that.type})).then((res) => {
 				that.list=res.data;
 			})
 		},
@@ -69,7 +64,7 @@ export default {
 	},
   components:{
   	'top':top
-  }	
+  }
 }
 </script>
 <style scoped>

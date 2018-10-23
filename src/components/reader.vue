@@ -70,7 +70,6 @@
 </template>
 <script>
 	import axios from 'axios'
-	var querystring = require('querystring');
 export default{
 	data(){
 		return{
@@ -127,14 +126,14 @@ export default{
 		},
 		tlist(id){//目录列表
 			var that=this;
-			axios.post(process.env.API_HOST+'/title',querystring.stringify({id:id})).then((res) => {
+			axios.post(process.env.API_HOST+'/title',this.qs.stringify({id:id})).then((res) => {
 			that.titlelist=res.data;
 			that.maxChapter=res.data.length;
 		})
 		},
 		pcon(id,num){//内容
 			var that=this;
-			axios.post(process.env.API_HOST+'/reader',querystring.stringify({id:id,number:num})).then((res) => {
+			axios.post(process.env.API_HOST+'/reader',this.qs.stringify({id:id,number:num})).then((res) => {
 			  that.title=res.data[0].title;
 			  that.content=res.data[0].content.split("-");
 		})

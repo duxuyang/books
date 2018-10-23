@@ -6,7 +6,7 @@
 			<img src="../assets/images/user.png" alt="" v-if="userimg">
 			<img src="../assets/images/userhead.jpg" alt="" v-else>
 		</li>
-		<li @click="booklist">
+		<li @click="booksm">
 			<img src="../assets/images/bookslist.png" alt="">
 		</li>
 	</ul>
@@ -71,7 +71,7 @@
 					<a href="javascript:void(0)">
 						<img :src="item.images" alt="">
 						<div class="tname">{{item.name}}</div>
-						<div class="tauthor">{{item.author}}</div>						
+						<div class="tauthor">{{item.author}}</div>
 					</a>
 				 </router-link>
 				</li>				
@@ -143,7 +143,7 @@
 </template>
 
 <script>
-	 import axios from 'axios'
+
 	export default {
   data () {
     return {
@@ -163,12 +163,12 @@
   },
   methods:{
 		hotred:function(){
-			axios.post(process.env.API_HOST+'/hotbook').then((res) => {
+			this.axios.post(process.env.API_HOST+'/hotbook').then((res) => {
 				this.hotlist=res.data;
 			})
 		},
 		free(){
-			axios.post(process.env.API_HOST+'/freeread').then((res) => {
+			this.axios.post(process.env.API_HOST+'/freeread').then((res) => {
 				this.freelist=res.data;
 			})
 		},
@@ -176,18 +176,23 @@
 			this.$router.push('/list/'+msg)
 		},
 		user(){
-			if(!this.$store.state.isLogin){
+			this.$router.push('/myinfo')
+/*			if(!this.$store.state.isLogin){
 				this.$router.push('/login')
 			}else{
 				this.$router.push('/myinfo')
-			}
-			
+			}*/
 		},
-		booklist(){
-
+		booksm(){
+			this.$router.push('/mylist')
+/*			if(!this.$store.state.isLogin){
+				this.$router.push('/login')
+			}else{
+				this.$router.push('/mylist')
+			}*/
 		},
 		islogin(){
-			axios.post(process.env.API_HOST+'/users/login').then((res) =>{
+			this.axios.post(process.env.API_HOST+'/users/login').then((res) =>{
 				
 			})
 		}
@@ -204,6 +209,7 @@ body{
 	width: 100%;
 	height: 44px;
 	border-bottom: 1px solid #f3f3f3;
+	background: #ed424b;
 }
 .header ul{
 	height: 100%;

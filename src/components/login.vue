@@ -38,7 +38,6 @@
 <script>
 	import top from '@/components/top'
 	import axios from 'axios'
-	var querystring = require('querystring');
 	export default {
   data () {
     return {
@@ -57,7 +56,7 @@
 		},
 		login1(){
 			var that=this;
-			axios.post(process.env.API_HOST+'/users/login',querystring.stringify({uname:that.name,upass:that.pass})).then((res) =>{
+			axios.post(process.env.API_HOST+'/users/login',this.qs.stringify({uname:that.name,upass:that.pass})).then((res) =>{
 					if(res.data.code==1){//登录成功
 					  this.$store.state.userid=res.data.id;
 						this.$store.state.isLogin=true;

@@ -6,14 +6,17 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import store from './vuex/store';
+import querystring from 'querystring';
 
 Vue.use(MintUI)
+Vue.prototype.axios = axios;
+Vue.prototype.qs = querystring;
 Vue.config.productionTip = false
 
 
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
-    if (to.fullPath=="/userinfo" || to.fullPath=="/bookcase") {
+    if (to.fullPath=="/userinfo" || to.fullPath=="/mylist") {
 			if(!store.state.isLogin){
 				router.push('/login')
 			}

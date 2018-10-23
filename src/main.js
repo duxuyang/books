@@ -16,13 +16,14 @@ Vue.config.productionTip = false
 
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
-    if (to.fullPath=="/userinfo" || to.fullPath=="/mylist") {
+  next()
+/*    if (to.fullPath=="/userinfo" || to.fullPath=="/mylist") {
 			if(!store.state.isLogin){
 				router.push('/login')
 			}
     } else {
       next()
-    }
+    }*/
 });
 
 

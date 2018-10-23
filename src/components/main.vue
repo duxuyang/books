@@ -176,26 +176,24 @@
 			this.$router.push('/list/'+msg)
 		},
 		user(){
-			this.$router.push('/myinfo')
-/*			if(!this.$store.state.isLogin){
+			if(!this.$store.state.isLogin){
 				this.$router.push('/login')
 			}else{
 				this.$router.push('/myinfo')
-			}*/
+			}
 		},
 		booksm(){
-			this.$router.push('/mylist')
-/*			if(!this.$store.state.isLogin){
+			if(!this.$store.state.isLogin){
 				this.$router.push('/login')
 			}else{
-				this.$router.push('/mylist')
-			}*/
-		},
-		islogin(){
+			  this.$router.push('/mylist')
+			}
+		}
+/*		islogin(){
 			this.axios.post(process.env.API_HOST+'/users/login').then((res) =>{
 				
 			})
-		}
+		}*/
   }
 }
 

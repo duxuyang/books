@@ -1,4 +1,5 @@
 import './assets/css/reset.css'
+import './assets/icon/iconfont.css'
 import Vue from 'vue'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'

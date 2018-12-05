@@ -126,17 +126,27 @@ export default{
 		},
 		tlist(id){//目录列表
 			var that=this;
-			axios.post(process.env.API_HOST+'/title',this.qs.stringify({id:id})).then((res) => {
+		this.axios.post('/title', {id:id}	, response => {
+     				that.titlelist=response.data;
+     				that.maxChapter=response.data.length;
+					});
+/*			axios.post(process.env.API_HOST+'/title',this.qs.stringify({id:id})).then((res) => {
 			that.titlelist=res.data;
 			that.maxChapter=res.data.length;
-		})
+		})*/
+
 		},
 		pcon(id,num){//内容
 			var that=this;
-			axios.post(process.env.API_HOST+'/reader',this.qs.stringify({id:id,number:num})).then((res) => {
+				this.axios.post('/reader', {id:id,number:num}	, response => {
+     				that.title=response.data[0].title;
+     				that.content=response.data[0].content.split("-");
+					});
+/*			axios.post(process.env.API_HOST+'/reader',this.qs.stringify({id:id,number:num})).then((res) => {
 			  that.title=res.data[0].title;
 			  that.content=res.data[0].content.split("-");
-		})
+		})*/
+
 		},
 		clicktitle(index){//点击章列表
 			this.showis();

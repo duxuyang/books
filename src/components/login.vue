@@ -56,7 +56,16 @@
 		},
 		login1(){
 			var that=this;
-			axios.post(process.env.API_HOST+'/users/login',this.qs.stringify({uname:that.name,upass:that.pass})).then((res) =>{
+			this.axios.post('/users/login',{uname:that.name,upass:that.pass},response => {
+     			if(response.data.code==1){//登录成功
+					  this.$store.state.userid=response.data.id;
+						this.$store.state.isLogin=true;
+						this.$router.push('/myinfo');
+					}else{//登录失败
+
+					}
+					});
+/*			axios.post(process.env.API_HOST+'/users/login',this.qs.stringify({uname:that.name,upass:that.pass})).then((res) =>{
 					if(res.data.code==1){//登录成功
 					  this.$store.state.userid=res.data.id;
 						this.$store.state.isLogin=true;
@@ -64,7 +73,7 @@
 					}else{//登录失败
 
 					}
-			})		
+			})*/
 		}
   },
   components:{
@@ -84,14 +93,14 @@
 	height:42px;
 	margin:0 auto;
 	border-radius: 7px;
-	border: 1px solid #faa200;/*no*/
+	border: 1px solid #FF6B56;/*no*/
 }
 .tablist>div{
 	flex: 1;
 	display: flex;
 	align-items:center;
 	justify-content:center;
-	color: #faa200;
+	color: #FF6B56;
 	height:100%;
 	font-size: 15px;
 
@@ -107,7 +116,7 @@
     border-bottom-right-radius: 7px;
 }
 .tablist>div.active{
-	background: #faa200;
+	background: #FF6B56;
 	color: #fff;
 }
 .mlist{
@@ -159,7 +168,7 @@
 	right:0;
 	transform:translateY(-50%);
   font-size: 12px;
-  color: #faa200;
+  color: #FF6B56;
 }
 .ma>div{
 	position: absolute;
@@ -168,7 +177,7 @@
 	transform:translateY(-50%);
 	font-size: 12px;
 	color: #faa200;
-	background-color: #faa200;
+	background-color: #FF6B56;
 	width: 98px;
 	height: 32px ;
 	border-radius: 2px;
@@ -183,7 +192,7 @@
 	justify-content:center;
 	height: 46px;
 	font-size: 18px;
-	background: #faa200;
+	background: #FF6B56;
 	width: 100%;
 	margin-bottom: 10px;
 	color: #fff;
@@ -196,13 +205,13 @@
 	display: flex;
 	align-items:center;
 	justify-content:center;
-	color: #faa200;
+	color: #FF6B56;
 	background: none;
 	height: 46px;
 	font-size: 18px;
 	width: 100%;
 	margin-bottom: 10px;
-	border: 1px solid #f0ad4e;
+	border: 1px solid #FF6B56;
 	border-radius: 3px;/*no*/
 }
 

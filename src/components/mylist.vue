@@ -44,9 +44,12 @@
 			},
 			listdatas(){
 				var that=this;
-				this.axios.post(process.env.API_HOST+'/users/collect',this.qs.stringify({id:this.$store.state.userid})).then((res) => {
+				this.axios.post('/users/collect',{id:this.$store.state.userid},response => {
+     				that.list=response.data;
+					});
+/*				this.axios.post(process.env.API_HOST+'/users/collect',this.qs.stringify({id:this.$store.state.userid})).then((res) => {
 					that.list=res.data;
-				})
+				})*/
 			}
 		},
 	  components:{

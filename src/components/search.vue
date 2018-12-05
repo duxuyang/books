@@ -40,6 +40,9 @@
 		},
 		created(){
 				this.hotsearch();
+/*				this.axios.post('/ceshi', {id:'124',name:'tom'}	, response => {
+     				console.log(response.data)
+					});*/
 		},
 		methods:{
 			back(msg){
@@ -55,10 +58,10 @@
 			},
 			common(name){
 				var that=this;
-				this.axios.post(process.env.API_HOST+'/search',this.qs.stringify({name:name})).then((res) => {
-					this.islist=true;
-				that.list=res.data;
-			})
+				this.axios.post('/search', {name:name},response => {
+						this.islist=true;
+						that.list=response.data;
+					});
 			},
 			dlist(id){//单击列表跳转
 				this.$router.push('/detail/'+id); 
@@ -68,10 +71,9 @@
 			},
 			hotsearch(){ //热门搜索
 				var that=this;
-				this.axios.post(process.env.API_HOST+'/hotsearch').then((res) => {
-				that.hotlist=res.data;
-				console.log(res.data)
-			})
+				 this.axios.post('/hotsearch', {}	, response => {
+						that.hotlist=response.data;
+					});
 			}
 		},
 		watch:{

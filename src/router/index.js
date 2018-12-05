@@ -32,7 +32,10 @@ export default new Router({
     {
       path: '/list/:type',
       name:'list',
-      component:list
+      component:list,
+/*      meta: {
+        keepAlive: true 
+      }*/
     },
      {
       path: '/reader/:id',

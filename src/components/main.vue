@@ -170,14 +170,20 @@
   },
   methods:{
 		hotred:function(){
-			this.axios.post(process.env.API_HOST+'/hotbook').then((res) => {
+			this.axios.post('/hotbook', {},response => {
+     				this.hotlist=response.data;
+					});
+/*			this.axios.post(process.env.API_HOST+'/hotbook').then((res) => {
 				this.hotlist=res.data;
-			})
+			})*/
 		},
 		free(){
-			this.axios.post(process.env.API_HOST+'/freeread').then((res) => {
+			this.axios.post('/freeread',{},response => {
+     				this.freelist=response.data;
+					});
+/*			this.axios.post(process.env.API_HOST+'/freeread').then((res) => {
 				this.freelist=res.data;
-			})
+			})*/
 		},
 		type(msg){
 			this.$router.push('/list/'+msg)

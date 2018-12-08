@@ -1,36 +1,32 @@
 # mybooks
 
-> duxuyang
+> 技术栈：vue + vue-router + vuex + webpack + axios  + flex + express + nodejs + mysql + localStorage
 
-## Build Setup
+> [api地址](https://github.com/duxuyang/book-node)
+
+
+## 使用说明
 
 ``` bash
-# install dependencies
+#克隆项目
+git clone https://github.com/duxuyang/books.git
+
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 本地开发环境 访问http://localhost:8080
 npm run dev
 
-# build for production with minification
+# 构建生产
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
-npm install axios
-#
-npm install mint-ui -S
+## 项目说明
+数据库使用的是mysql
+：[地址](https://pan.baidu.com/s/1QYSfWN9vQkBEku50Cvsncw)。
 
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# books
+
+
+

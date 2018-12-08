@@ -69,9 +69,12 @@
 			},
 			info(){
 				var that=this;
-					this.axios.post(process.env.API_HOST+'/users/myinfo',this.qs.stringify({id:this.$store.state.userid})).then((res) =>{
+				this.axios.post('/users/myinfo',{id:this.$store.state.userid},response => {
+     				that.uname=response.data[0].uname;
+					});
+/*					this.axios.post(process.env.API_HOST+'/users/myinfo',this.qs.stringify({id:this.$store.state.userid})).then((res) =>{
 						that.uname=res.data[0].uname;
-					})				
+					})	*/	
 			},
 			back(){
 				this.$router.push('/main');

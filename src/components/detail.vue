@@ -112,9 +112,12 @@
 				this.$router.go(-1);
 			},
 			list(id){
-				this.axios.post(process.env.API_HOST+'/bookdetail',this.qs.stringify({id:id})).then((res) => {
+				this.axios.post('/bookdetail', {id:id}	, response => {
+     				this.detail=response.data[0];
+					});
+/*				this.axios.post(process.env.API_HOST+'/bookdetail',this.qs.stringify({id:id})).then((res) => {
 					this.detail=res.data[0];
-				})
+				})*/
 
 			},
 			addcase(){

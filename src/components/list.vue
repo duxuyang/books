@@ -32,31 +32,46 @@ export default {
 		}
 	},
 	created(){
+		//this.$route.meta.keepAlive=true;
 		this.type=this.$route.params.type;
 		this.listdatas(1);
 	},
 	methods:{
 		back(msg){
 			this.$router.go(-1);
+			//console.log(this.$route)
+			//this.$route.meta.keepAlive=false;
+			this.$destroy();
 		},
 		loadMore() {
 			this.pi++;
 		  this.loading = true;
 		  var that=this;
-			this.axios.post(process.env.API_HOST+'/type',this.qs.stringify({pno:that.pi,pageSize:8,type:that.type})).then((res) => {
+		  this.axios.post('/type',{pno:that.pi,pageSize:8,type:that.type},response=>{
+     				this.loading = false;
+     		if(response.data.length){
+					 for(let i of response.data){
+							that.list.push(i);
+					 }
+				}
+			});
+/*			this.axios.post(process.env.API_HOST+'/type',this.qs.stringify({pno:that.pi,pageSize:8,type:that.type})).then((res) => {
 				 this.loading = false;
 				if(res.data.length){
 					 for(let i of res.data){
 							that.list.push(i);
 					 }
 				}
-			})	
+			})*/
 		},
 		listdatas(pno){
 			var that=this;
-			this.axios.post(process.env.API_HOST+'/type',this.qs.stringify({pno:pno,pageSize:8,type:that.type})).then((res) => {
+			this.axios.post('/type', {pno:pno,pageSize:8,type:that.type},response => {
+						that.list=response.data;
+			});
+/*			this.axios.post(process.env.API_HOST+'/type',this.qs.stringify({pno:pno,pageSize:8,type:that.type})).then((res) => {
 				that.list=res.data;
-			})
+			})*/
 		},
 		toclick(id){
 			this.$router.push('/detail/'+id)
@@ -64,7 +79,16 @@ export default {
 	},
   components:{
   	'top':top
+  },
+/*   destroyed(){
+  	console.log("销毁");
   }
+ activated(){
+  	console.log("keep-alive 组件激活");
+  },
+  deactivated(){
+  	console.log("keep-alive 组件停用");
+  }*/
 }
 </script>
 <style scoped>

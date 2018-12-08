@@ -8,7 +8,7 @@ import login from '@/components/login'
 import bookcase from '@/components/bookcase'
 import myinfo from '@/components/myinfo'
 import mylist from '@/components/mylist'
-
+import search from '@/components/search'
 
 Vue.use(Router)
 
@@ -32,7 +32,10 @@ export default new Router({
     {
       path: '/list/:type',
       name:'list',
-      component:list
+      component:list,
+/*      meta: {
+        keepAlive: true 
+      }*/
     },
      {
       path: '/reader/:id',
@@ -57,6 +60,10 @@ export default new Router({
      {
       path:'/mylist',
       component:mylist
+    },
+		 {
+      path:'/search',
+      component:search
     }
   ]
 })

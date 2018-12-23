@@ -4,7 +4,7 @@
 
 > [api地址](https://github.com/duxuyang/book-node)
 
-
+> 另外推荐一下本项目的[react版本](https://github.com/duxuyang/react-book)
 ## 使用说明
 
 ``` bash

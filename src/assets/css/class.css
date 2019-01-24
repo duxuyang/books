@@ -1,0 +1,54 @@
+.classPage{
+	padding:44px 15px 0;
+}
+.classPage h3{
+	color: #1A1A1A;
+	font-weight: 500;
+}
+.classPage .ul{
+	width:100%;
+	display: flex;
+	flex-wrap :wrap;
+}
+.classPage .ul li{
+	width:50%;
+}
+.bsort{
+	background: #E8FFE6;
+	margin:4px;
+}
+.bsort .title{
+	display: flex;
+	justify-content:center;
+	font-size: 14px;
+}
+.bsort ul{
+	position:relative;
+	width:70px;
+	height:58px;
+	margin: 0 auto;
+}
+.bsort li{
+	position:absolute;
+	width:36px;
+}
+.bsort li img{
+	width:38px;
+	height: 50px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.bsort li:nth-child(1){
+     left: -0.3125rem;
+    top: 0.5rem;
+    z-index: 1;
+}
+.bsort li:nth-child(2){
+	left: 1rem;
+    top: 0.15625rem;
+    z-index: 6;
+}
+.bsort li:nth-child(3){
+	left: 2.4375rem;
+    top: 0.5rem;
+    z-index: 1;
+}

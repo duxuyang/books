@@ -64,7 +64,7 @@ justify-content:center;
 }
 .nav-1>div{
 	width: 25%;
-	height: 55px;
+	height: 70px;
 	display: flex;
 	flex-direction:column;
 	justify-content:center;
@@ -72,49 +72,34 @@ justify-content:center;
 	margin-top: 10px;
 }
 .nav-1 .icon{
-	width: 36px;
-	height: 40px;
+	width: 46px;
+	height: 46px;
+}
+.nav-1>div>h4{
+	margin-top:5px;
 }
 .nav-1>div:nth-child(1) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -243px;/* //48.5 */
-	background-size:100%;
+	background: url(../images/class.png) no-repeat;
+  background-position:-54px 0px;/* //48.5 */
+	background-size: 227px 179px;
 }
 .nav-1>div:nth-child(2) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -243px;
-	background-size:100%;
+	background: url(../images/class.png) no-repeat;
+  background-position: -104px 0px;
+	background-size: 227px 179px;
 }
 .nav-1>div:nth-child(3) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -194.5px;
-	background-size:100%;
+	background: url(../images/class.png) no-repeat;
+  background-position: 0px -97px;
+	background-size: 227px 179px;
 }
 .nav-1>div:nth-child(4) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -388.5px;
-	background-size:100%;
+	background: url(../images/class.png) no-repeat;
+  background-position: -100px -97px;
+	background-size: 227px 179px;
 }
-.nav-1>div:nth-child(5) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -437px;
-	background-size:100%;
-}
-.nav-1>div:nth-child(6) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -485.5px;
-	background-size:100%;
-}
-.nav-1>div:nth-child(7) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -631px;
-	background-size:100%;
-}
-.nav-1>div:nth-child(8) .icon{
-	background: url(../images/download.png) no-repeat;
-  background-position: 0 -679.5px;
-	background-size:100%;
-}
+
+
 .booklist{
 	width:100%;
 	padding:15px 15px;

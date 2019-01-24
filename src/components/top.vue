@@ -26,12 +26,17 @@
 </script>
 <style scoped>
 	.header{
+		position:fixed;
+		top:0;
+		left:0;
+		right:0;
 	width: 100%;
 	height: 44px;
 	display: flex;
 	align-items:center;
 	background: #fc0e50 url(../assets/images/header.png) no-repeat;
 	background-size: 100% 100%;
+	z-index:999;
 }
 .header div{
 	font-size: 16px;

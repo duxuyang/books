@@ -1,6 +1,26 @@
 <template>
 	<div>
-		<top :tname="type"  @sendback="back"></top>
+		<top tname="分类"  @sendback="back"></top>
+		<div class="typelist">
+			<ul>
+				<li>
+					<div class="typeleft" @click="all">
+						<span class="typename">{{name}}</span>
+					  <span :class="[xiala,{shouqi:show}]"></span>
+					</div>
+				</li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="listname" v-show="show">
+			<ul>
+				<li v-for="(val,key) in typename" @click="typefun(val,key)">
+					<span :class="{active:key==index}">{{val}}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="modal" v-show="show"></div>
 		<div class="list">
 			<ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="false">
 				<li v-for="item in list" @click="toclick(item.id)">
@@ -28,12 +48,16 @@ export default {
 		return {
 			list:[],
 			pi:1,
-			type:''
+			index:0,
+			xiala:"xiala",
+			show:false,
+			name:'全部',
+			typename:['全部','玄幻','修真','都市','历史','网游','科幻','言情','其他']
 		}
 	},
 	created(){
 		//this.$route.meta.keepAlive=true;
-		this.type=this.$route.params.type;
+		//this.type=this.$route.params.type;
 		this.listdatas(1);
 	},
 	methods:{
@@ -47,7 +71,7 @@ export default {
 			this.pi++;
 		  this.loading = true;
 		  var that=this;
-		  this.axios.post('/type',{pno:that.pi,pageSize:8,type:that.type},response=>{
+		  this.axios.post('/type',{pno:that.pi,pageSize:8,type:that.name},response=>{
      				this.loading = false;
      		if(response.data.length){
 					 for(let i of response.data){
@@ -66,7 +90,7 @@ export default {
 		},
 		listdatas(pno){
 			var that=this;
-			this.axios.post('/type', {pno:pno,pageSize:8,type:that.type},response => {
+			this.axios.post('/type', {pno:pno,pageSize:8,type:that.name},response => {
 						that.list=response.data;
 			});
 /*			this.axios.post(process.env.API_HOST+'/type',this.qs.stringify({pno:pno,pageSize:8,type:that.type})).then((res) => {
@@ -75,6 +99,15 @@ export default {
 		},
 		toclick(id){
 			this.$router.push('/detail/'+id)
+		},
+		typefun(val,index){
+			this.index=index;
+			this.name=val;
+			this.listdatas(1);
+			this.show?this.show=false:this.show=true;
+		},
+		all(){
+			this.show?this.show=false:this.show=true;
 		}
 	},
   components:{
@@ -91,66 +124,4 @@ export default {
   }*/
 }
 </script>
-<style scoped>
-	.list{
-	width: 100%;
-	padding:0 15px;
-}
-.list ul li{
-	display: flex;
-	padding: 15px 0;
- border-bottom: 1px solid #f0f1f2;
-}
-.list ul li img{
-	width: 66px;
-	height: 90px;
-}
-.list ul li .book-detail{
-	flex: 1;
-	margin-left: 20px;
-	position: relative;
-}
-.list ul li .book-detail h3{
-	font-size: 16px;
-}
-.list ul li .book-desc{
-	display: -webkit-box;
-	/*! autoprefixer: off */
-  -webkit-box-orient:vertical;
-  /* autoprefixer: on */
-  -webkit-line-clamp:2;
-  overflow: hidden;
-  font-size: 14px;
-  margin-top:5px;
-}
-.list ul li .book-meta{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	font-size: 0;
-	line-height: 20px;
-}
-.list ul li .book-meta>span{
-	display: inline-block;
-}
-.list ul li .book-meta .author{
-	font-size: 14px;
-	color: grey;
-	float: left;
-
-}
-.list ul li .book-meta .type{
-	font-size: 13px;
-	color: #f16299;
-	float: right;
-	margin-left: 10px;
-}
-.list ul li .book-meta .ser{
-  color: #f69a48;
-  font-size: 13px;
-  float: right;
-	
-}
-
-</style>
+<style scoped src="../assets/css/list.css"></style>

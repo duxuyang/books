@@ -9,7 +9,6 @@
 		<li @click="booksm">
 			<img src="../assets/images/bookslist.png" alt="">
 		</li>
-
 	</ul>
 </div>
 <div class="wiper">
@@ -28,37 +27,21 @@
 </div>
 <div class="nav">
 	<div class="nav-1">
-		<div @click="type('玄幻')">
+		<div @click="type(1)">
 			<div class="icon"></div>
-			<h4 class="guid">玄幻</h4>
+			<h4 class="guid">分类</h4>
 		</div>
-		<div @click="type('修真')">
+		<div @click="type(2)">
 			<div class="icon"></div>
-			<h4 class="guid">修真</h4>
+			<h4 class="guid">排行榜</h4>
 		</div>
-		<div @click="type('都市')">
+		<div @click="type(3)">
 			<div class="icon"></div>
-			<h4 class="guid">都市</h4>
+			<h4 class="guid">新书</h4>
 		</div>
-		<div @click="type('历史')">
+		<div @click="type(4)">
 			<div class="icon"></div>
-			<h4 class="guid">历史</h4>
-		</div>
-		<div @click="type('网游')">
-			<div class="icon"></div>
-			<h4 class="guid">网游</h4>
-		</div>
-		<div @click="type('科幻')">
-			<div class="icon"></div>
-			<h4 class="guid">科幻</h4>
-		</div>
-		<div @click="type('言情')">
-			<div class="icon"></div>
-			<h4 class="guid">言情</h4>
-		</div>
-		<div @click="type('其他')">
-			<div class="icon"></div>
-			<h4 class="guid">其他</h4>
+			<h4 class="guid">福利</h4>
 		</div>
 	</div>
 	
@@ -186,7 +169,23 @@
 			})*/
 		},
 		type(msg){
-			this.$router.push('/list/'+msg)
+			switch(msg){
+				case 1://分类
+				  this.$router.push('/list');
+				  break;
+				case 2:
+				  
+				  break;
+				case 3:
+
+				 break;
+				case 4:
+
+				 break;
+				default:
+				  
+			}
+		//	this.$router.push('/list/'+msg)
 		},
 		user(){
 			if(!this.$store.state.isLogin){

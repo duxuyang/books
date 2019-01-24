@@ -20,52 +20,59 @@ const bookcase = r => require.ensure([], () => r(require('../components/bookcase
 const myinfo = r => require.ensure([], () => r(require('../components/myinfo.vue')))
 const mylist = r => require.ensure([], () => r(require('../components/mylist.vue')))
 const search = r => require.ensure([], () => r(require('../components/search.vue')))
-
+const classs = r => require.ensure([], () => r(require('../components/class.vue')))
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [{
-    path: '/',
-    name: 'main',
-    component: main
-  }, {
-    path: '/main',
-    name: 'main',
-    component: main
-  }, {
-    path: '/detail/:id',
-    name: 'detail',
-    component: detail
-  }, {
-    path: '/list/:type',
-    name: 'list',
-    component: list,
-    /*      meta: {
-            keepAlive: true 
-          }*/
-  }, {
-    path: '/reader/:id',
-    name: 'reader',
-    component: reader
-  }, {
-    path: '/login',
-    name: 'login',
-    component: login
-  }, {
-    path: '/bookcase',
-    name: 'bookcase',
-    component: bookcase
-  }, {
-    path: '/myinfo',
-    name: 'myinfo',
-    component: myinfo
-  }, {
-    path: '/mylist',
-    component: mylist
-  }, {
-    path: '/search',
-    component: search
-  }]
+      path: '/',
+      name: 'main',
+      component: main
+    }, {
+      path: '/main',
+      name: 'main',
+      component: main
+    }, {
+      path: '/detail/:id',
+      name: 'detail',
+      component: detail
+    }, {
+      path: '/list',
+      name: 'list',
+      component: list,
+      /*      meta: {
+              keepAlive: true 
+            }*/
+    }, {
+      path: '/reader/:id',
+      name: 'reader',
+      component: reader
+    }, {
+      path: '/login',
+      name: 'login',
+      component: login
+    }, {
+      path: '/bookcase',
+      name: 'bookcase',
+      component: bookcase
+    }, {
+      path: '/myinfo',
+      name: 'myinfo',
+      component: myinfo
+    }, {
+      path: '/mylist',
+      component: mylist
+    }, {
+      path: '/search',
+      component: search
+    }, {
+      path: '/class',
+      component: classs
+    }
+
+
+
+  ]
 })
